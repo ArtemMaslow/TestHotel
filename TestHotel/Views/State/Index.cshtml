@@ -1,0 +1,25 @@
+﻿@model TestHotel.ViewModels.StatesViewModel
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>StatesPage</title>
+</head>
+<body>
+    <table>
+        <tr>
+            <th>
+                Состояние
+            </th>
+        </tr>
+        @foreach (var state in Model.States)
+        {
+            <tr>
+                <td>@state.Name</td>
+            </tr>
+        }
+    </table>
+</body>
+</html>

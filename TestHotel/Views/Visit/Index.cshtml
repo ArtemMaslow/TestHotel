@@ -1,0 +1,45 @@
+﻿@model TestHotel.ViewModels.VisitsViewModel
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>VisitsPage</title>
+</head>
+<body>
+    <table>
+        <tr>
+            <th>
+                Имя
+            </th>
+            <th>
+                Телефон
+            </th>
+            <th>
+                Номер
+            </th>
+            <th>
+                Въезд
+            </th>
+            <th>
+                Выезд
+            </th>
+            <th>
+                Цена
+            </th>
+        </tr>
+        @foreach (var visit in Model.Visits)
+        {
+            <tr>
+                @*<td>@visit.Client.Name</td>*@
+                @*<td>@visit.Client.Phone</td>*@
+                @*<td>@visit.Room.Number</td>*@
+                <td>@visit.Arrive</td>
+                <td>@visit.Leave</td>
+                <td>@visit.Cost</td>
+            </tr>
+        }
+    </table>
+</body>
+</html>

@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using TestHotel.Entities;
+using TestHotel.Models;
 
 namespace TestHotel.Services
 {
@@ -16,18 +16,50 @@ namespace TestHotel.Services
             _context = context;
         }
 
-        public async Task<Room> GetRoomInfo(string number)
+        public async Task CreateRoom(string number, int capacity, Guid typeId, Guid stateId, decimal price)
         {
-            var roomInfo = await _context.Rooms.SingleAsync(n => n.Number == number);
-            Console.WriteLine($"{roomInfo.Number} {roomInfo.Type} {roomInfo.Capacity} {roomInfo.State}");
+            var room = new Room(number, capacity, typeId, stateId, price);
+            _context.Rooms.Add(room);
 
-            return roomInfo;
+            await _context.SaveChangesAsync();
         }
 
-        public async Task Room(string number, int capacity, string type, bool state)
+        public async Task UpdateRoom(Guid roomId, string number, int capacity, Guid typeId, Guid stateId, decimal price)
         {
-            var room = new Room(number, capacity, type, state);
-            _context.Rooms.Add(room);
+            var room = await _context.Rooms.SingleAsync(r => r.Id == roomId);
+            room.Number = number;
+            room.Capacity = capacity;
+            room.TypeId = typeId;
+            room.StateId = stateId;
+            room.Price = price;
+
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task DeleteRoom(Guid roomId)
+        {
+            var room = await _context.Rooms.SingleAsync(r => r.Id == roomId);
+            _context.Rooms.Remove(room);
+
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task<Room> GetRoom(Guid roomId)
+        {
+            var room = await _context.Rooms.SingleAsync(r => r.Id == roomId);
+            return room;
+        }
+
+        public async Task<List<Room>> GetRooms()
+        {
+            var rooms = await _context.Rooms.ToListAsync();
+            return rooms;
+        }
+
+        public async Task ChangeState(Guid roomId, Guid stateId)
+        {
+            var room = await _context.Rooms.SingleAsync(r => r.Id == roomId);
+            room.StateId = stateId;
 
             await _context.SaveChangesAsync();
         }

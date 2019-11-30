@@ -1,0 +1,25 @@
+﻿@model TestHotel.ViewModels.RoomTypesViewModel
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>RoomTypesPage</title>
+</head>
+<body>
+    <table>
+        <tr>
+            <th>
+                Тип
+            </th>
+        </tr>
+        @foreach (var roomType in Model.RoomTypes)
+        {
+            <tr>
+                <td>@roomType.Type</td>
+            </tr>
+        }
+    </table>
+</body>
+</html>

@@ -1,0 +1,28 @@
+﻿@model TestHotel.ViewModels.ClientsViewModel
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ClientsPage</title>
+</head>
+<body>
+    <table>
+        <tr>
+            <th>
+                Клиенты
+            </th>
+        </tr>
+        @foreach (var client in Model.Clients)
+        {
+            <tr>
+                <td>@client.Name</td>
+                <td>@client.Surname</td>
+                <td>@client.Patronymic</td>
+                <td>@client.Phone</td>
+            </tr>
+        }
+    </table>
+</body>
+</html>

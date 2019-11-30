@@ -1,0 +1,112 @@
+﻿@model TestHotel.ViewModels.RoomViewModel
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Roompage</title>
+</head>
+<body>
+    <form method="get">
+        <div>
+            <label>Номер:</label>
+            @Html.TextBox("number", Model.FilterViewModel.SelectedNumber)
+
+            <label>Вместимость:</label>
+            @Html.TextBox("capacity", Model.FilterViewModel.SelectedCapacity)
+
+            <label class="control-label">Тип: </label>
+            @Html.DropDownList("typeId", Model.FilterViewModel.Types,
+                    htmlAttributes: new { @class = "form-control" })
+
+            <label class="control-label">Состояние: </label>
+            @Html.DropDownList("stateId", Model.FilterViewModel.States,
+                    htmlAttributes: new { @class = "form-control" })
+
+            <input type="submit" value="Фильтр" />
+        </div>
+    </form>
+
+    <table>
+        <tr>
+            <th>
+                <a asp-action="Index"
+                   asp-route-sortOrder="@Model.SortViewModel.NumberSort"
+                   asp-route-type="@Model.FilterViewModel.SelectedType"
+                   asp-route-state="@Model.FilterViewModel.SelectedState"
+                   asp-route-capacity="@Model.FilterViewModel.SelectedCapacity"
+                   asp-route-number="@Model.FilterViewModel.SelectedNumber">
+                    Номер
+                </a>
+            </th>
+            <th>
+                <a asp-action="Index"
+                   asp-route-sortOrder="@Model.SortViewModel.TypeSort"
+                   asp-route-type="@Model.FilterViewModel.SelectedType"
+                   asp-route-state="@Model.FilterViewModel.SelectedState"
+                   asp-route-capacity="@Model.FilterViewModel.SelectedCapacity"
+                   asp-route-number="@Model.FilterViewModel.SelectedNumber">
+                    Тип
+                </a>
+            </th>
+            <th>
+                <a asp-action="Index"
+                   asp-route-sortOrder="@Model.SortViewModel.CapacitySort"
+                   asp-route-type="@Model.FilterViewModel.SelectedType"
+                   asp-route-state="@Model.FilterViewModel.SelectedState"
+                   asp-route-capacity="@Model.FilterViewModel.SelectedCapacity"
+                   asp-route-number="@Model.FilterViewModel.SelectedNumber">
+                    Вместимость
+                </a>
+            </th>
+            <th>
+                <a asp-action="Index"
+                   asp-route-sortOrder="@Model.SortViewModel.StateSort"
+                   asp-route-type="@Model.FilterViewModel.SelectedType"
+                   asp-route-state="@Model.FilterViewModel.SelectedState"
+                   asp-route-capacity="@Model.FilterViewModel.SelectedCapacity"
+                   asp-route-number="@Model.FilterViewModel.SelectedNumber">
+                    Состояние
+                </a>
+            </th>
+        </tr>
+        @foreach (var room in Model.Rooms)
+        {
+            <tr>
+                <td>@room.Number</td>
+                <td>@room.Type.Type</td>
+                <td>@room.Capacity</td>
+                <td>@room.State.Name</td>
+            </tr>
+        }
+    </table>
+
+    @if (Model.PageViewModel.HasPreviosPage)
+    {
+        <a asp-action="Index"
+           asp-route-page="@Model.PageViewModel.PageNumber - 1"
+           asp-route-sortorder="@Model.SortViewModel.Current"
+           asp-route-type="@Model.FilterViewModel.SelectedType"
+           asp-route-state="@Model.FilterViewModel.SelectedState"
+           asp-route-capacity="@Model.FilterViewModel.SelectedCapacity"
+           asp-route-number="@Model.FilterViewModel.SelectedNumber">
+            <i class="glyphicon glyphicon-chevron-left"></i>
+            Назад
+        </a>
+    }
+    @if (Model.PageViewModel.HasNextPage)
+    {
+        <a asp-action="Index"
+           asp-route-page="@Model.PageViewModel.PageNumber + 1"
+           asp-route-sortorder="@Model.SortViewModel.Current"
+           asp-route-type="@Model.FilterViewModel.SelectedType"
+           asp-route-state="@Model.FilterViewModel.SelectedState"
+           asp-route-capacity="@Model.FilterViewModel.SelectedCapacity"
+           asp-route-number="@Model.FilterViewModel.SelectedNumber">
+            <i class="glyphicon glyphicon-chevron-right"></i>
+            Вперед
+        </a>
+    }
+</body>
+</html>

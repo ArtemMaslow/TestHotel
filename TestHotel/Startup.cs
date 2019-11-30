@@ -12,7 +12,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
-using TestHotel.Entities;
+using TestHotel.Models;
 using TestHotel.Options;
 using TestHotel.Services;
 
@@ -31,8 +31,9 @@ namespace TestHotel
             var options = new ApplicationOptions(_configuration["ConnectionString"]);
             services.AddSingleton(options);
 
+            services.AddRazorPages();
             services.AddControllers();
-            
+
             services.AddDbContext<DatabaseContext>(option =>
             {
                 option.UseNpgsql(options.ConnectionString,
@@ -40,7 +41,11 @@ namespace TestHotel
             });
 
             //services
+            services.AddScoped<ClientService>();
             services.AddScoped<RoomService>();
+            services.AddScoped<RoomTypeService>();
+            services.AddScoped<StateService>();
+            services.AddScoped<VisitService>();
 
             services.AddSwaggerGen(s =>
             {
