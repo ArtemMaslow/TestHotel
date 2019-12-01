@@ -14,10 +14,13 @@ namespace TestHotel.Controllers
     public class VisitController : Controller
     {
         private readonly VisitService _visitService;
-
-        public VisitController(VisitService visitService)
+        private readonly RoomService _roomService;
+        private readonly ClientService _clientService;
+        public VisitController(VisitService visitService, RoomService roomService, ClientService clientService)
         {
             _visitService = visitService;
+            _roomService = roomService;
+            _clientService = clientService;
         }
 
         [HttpPost]
@@ -28,7 +31,7 @@ namespace TestHotel.Controllers
         }
 
         [HttpPost]
-        [Route("Close/{visitId}/{cost}/{stateId}")]
+        [Route("Close/{visitId}/{stateId}")]
         public async Task CloseVisit([FromRoute]Guid visitId, [FromRoute]Guid stateId)
         {
             var visit = await _visitService.GetVisit(visitId);

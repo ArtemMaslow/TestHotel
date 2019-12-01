@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -38,8 +39,16 @@ namespace TestHotel
             {
                 option.UseNpgsql(options.ConnectionString,
                     migr => migr.MigrationsAssembly("TestHotel"));
+                option.UseNpgsql(options.ConnectionString,
+                    option => option.SetPostgresVersion(9, 6));
             });
 
+            services.AddIdentity<User, IdentityRole>().AddEntityFrameworkStores<DatabaseContext>();
+            services.Configure<IdentityOptions>(options=>
+            {
+                options.Password.RequireNonAlphanumeric = false;
+            });
+            
             //services
             services.AddScoped<ClientService>();
             services.AddScoped<RoomService>();
@@ -59,6 +68,7 @@ namespace TestHotel
             //{
             //    app.UseDeveloperExceptionPage();
             //}
+
             app.UseSwagger();
             app.UseSwaggerUI(s =>
             {

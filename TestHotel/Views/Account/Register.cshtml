@@ -1,0 +1,53 @@
+﻿@model TestHotel.ViewModels.RegisterViewModel
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>RegisterPage</title>
+</head>
+<body>
+    <form method="post" asp-controller="Account" asp-action="Register">
+        <div asp-validation-summary="ModelOnly"></div>
+        <div>
+            <label asp-for="Email"></label><br />
+            <input asp-for="Email" />
+            <span asp-validation-for="Email"></span>
+        </div>
+        <div>
+            <label asp-for="Client.Name"></label><br />
+            <input asp-for="Client.Name" />
+            <span asp-validation-for="Client.Name"></span>
+        </div>
+        <div>
+            <label asp-for="Client.Surname"></label><br />
+            <input asp-for="Client.Surname" />
+            <span asp-validation-for="Client.Surname"></span>
+        </div>
+        <div>
+            <label asp-for="Client.Patronymic"></label><br />
+            <input asp-for="Client.Patronymic" />
+            <span asp-validation-for="Client.Patronymic"></span>
+        </div>
+        <div>
+            <label asp-for="Client.Phone"></label><br />
+            <input asp-for="Client.Phone" />
+            <span asp-validation-for="Client.Phone"></span>
+        </div>
+        <div>
+            <label asp-for="Password"></label><br />
+            <input asp-for="Password" />
+            <span asp-validation-for="Password"></span>
+        </div>
+        <div>
+            <label asp-for="PasswordConfirm"></label><br />
+            <input asp-for="PasswordConfirm" />
+            <span asp-validation-for="PasswordConfirm"></span>
+        </div>
+        <div>
+            <input type="submit" value="Регистрация" />
+        </div>
+    </form>
+</body>
+</html>

@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace TestHotel.Models
 {
-    public class DatabaseContext : DbContext
+    public class DatabaseContext : IdentityDbContext<User>
     {
         public DbSet<Room> Rooms { get; set; }
         public DbSet<Client> Clietns { get; set; }
@@ -22,7 +23,6 @@ namespace TestHotel.Models
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-
             modelBuilder.Entity<Room>().HasKey(key => key.Id);
             modelBuilder.Entity<Client>().HasKey(key => key.Id);
             modelBuilder.Entity<Visit>().HasKey(key => key.Id);
@@ -31,19 +31,25 @@ namespace TestHotel.Models
 
             modelBuilder.Entity<Visit>()
                 .HasOne(c => c.Client)
-                .WithMany(c=>c.Visits)
+                .WithMany(c => c.Visits)
                 .HasForeignKey(c => c.ClientId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<Visit>()
+                .HasOne(c => c.Room)
+                .WithMany(c => c.Visits)
+                .HasForeignKey(c => c.RoomId)
                 .OnDelete(DeleteBehavior.Restrict);
 
             modelBuilder.Entity<Room>()
                .HasOne(c => c.Type)
-               .WithMany(c=>c.Rooms)
+               .WithMany(c => c.Rooms)
                .HasForeignKey(c => c.TypeId)
                .OnDelete(DeleteBehavior.Restrict);
 
             modelBuilder.Entity<Room>()
               .HasOne(s => s.State)
-              .WithMany(s=>s.Rooms)
+              .WithMany(s => s.Rooms)
               .HasForeignKey(c => c.StateId)
               .OnDelete(DeleteBehavior.Restrict);
         }

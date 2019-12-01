@@ -49,7 +49,7 @@ namespace TestHotel.Controllers
         [Route("{typeId?}/{stateId?}/{capacity?}/{number?}/{page?}/{sortOrder?}")]
         public async Task<IActionResult> Index([FromRoute]Guid? typeId, [FromRoute]Guid? stateId, [FromRoute]int? capacity, [FromRoute]string number, [FromRoute]int page = 1, [FromRoute]SortState sortOrder = SortState.NumberAsc)
         {
-            int pageSize = 3;
+            int pageSize = 20;
 
             var rooms = await _roomService.GetRooms();
 
@@ -77,11 +77,6 @@ namespace TestHotel.Controllers
             {
                 rooms = rooms.Where(n => n.Number.Contains(number)).ToList();
             }
-
-            //ViewBag.NumberSort = sortOrder == SortState.NumberAsc ? SortState.NumberDesc : SortState.NumberAsc;
-            //ViewBag.TypeSort = sortOrder == SortState.TypeAsc ? SortState.TypeDesc : SortState.TypeAsc;
-            //ViewBag.CapacitySort = sortOrder == SortState.StateAsc ? SortState.StateDesc : SortState.StateAsc;
-            //ViewBag.StateSort = sortOrder == SortState.CapacityAsc ? SortState.CapacityDesc : SortState.CapacityAsc;
 
             //Sort
             switch (sortOrder)

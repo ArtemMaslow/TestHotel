@@ -60,13 +60,13 @@ namespace TestHotel.Services
 
         public async Task<Visit> GetVisit(Guid visitId)
         {
-            var visit = await _context.Visits.SingleAsync(c => c.Id == visitId);
+            var visit = await _context.Visits.Include(r=>r.Room).Include(c=>c.Client).SingleAsync(c => c.Id == visitId);
             return visit;
         }
 
         public async Task<List<Visit>> GetVisits()
         {
-            var visits = await _context.Visits.ToListAsync();
+            var visits = await _context.Visits.Include(r => r.Room).Include(c => c.Client).ToListAsync();
             return visits;
         }
     }

@@ -8,6 +8,19 @@
     <title>Roompage</title>
 </head>
 <body>
+    @if (User.Identity.IsAuthenticated)
+    {
+        <p>@User.Identity.Name</p>
+
+        <form method="post" asp-controller="Account" asp-action="LogOff">
+            <input type="submit" value="Выход" />
+        </form>
+    }
+    else
+    {
+        <a asp-controller="Account" asp-action="Login">Вход</a>
+        <a asp-controller="Account" asp-action="Register">Регистрация</a>
+    }
     <form method="get">
         <div>
             <label>Номер:</label>
@@ -32,11 +45,11 @@
         <tr>
             <th>
                 <a asp-action="Index"
-                   asp-route-sortOrder="@Model.SortViewModel.NumberSort"
-                   asp-route-type="@Model.FilterViewModel.SelectedType"
-                   asp-route-state="@Model.FilterViewModel.SelectedState"
-                   asp-route-capacity="@Model.FilterViewModel.SelectedCapacity"
-                   asp-route-number="@Model.FilterViewModel.SelectedNumber">
+                   asp-route-typeId="@(Model.FilterViewModel.SelectedType)"
+                   asp-route-stateId="@(Model.FilterViewModel.SelectedState)"
+                   asp-route-capacity="@(Model.FilterViewModel.SelectedCapacity)"
+                   asp-route-number="@(Model.FilterViewModel.SelectedNumber)"
+                   asp-route-sortOrder="@(Model.SortViewModel.NumberSort)">
                     Номер
                 </a>
             </th>

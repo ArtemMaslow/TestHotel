@@ -17,6 +17,8 @@ namespace TestHotel.Models
         public virtual RoomType Type { get; set; }
         public virtual State State { get; set; }
 
+        public virtual List<Visit> Visits { get; set; }
+
         public Room()
         {
 

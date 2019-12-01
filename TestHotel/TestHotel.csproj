@@ -9,9 +9,20 @@
     <Compile Remove="Migrations\20191127135529_Initial.Designer.cs" />
     <Compile Remove="Migrations\20191127140850_Initial.cs" />
     <Compile Remove="Migrations\20191127140850_Initial.Designer.cs" />
+    <Compile Remove="Migrations\20191128163720_Initial.cs" />
+    <Compile Remove="Migrations\20191128163720_Initial.Designer.cs" />
+    <Compile Remove="Migrations\20191129195540_ChangeNameOfClientTable.cs" />
+    <Compile Remove="Migrations\20191129195540_ChangeNameOfClientTable.Designer.cs" />
+    <Compile Remove="Migrations\20191129201344_decimalToNullable.cs" />
+    <Compile Remove="Migrations\20191129201344_decimalToNullable.Designer.cs" />
+    <Compile Remove="Migrations\20191130170735_newStructureVisitTable.cs" />
+    <Compile Remove="Migrations\20191130170735_newStructureVisitTable.Designer.cs" />
+    <Compile Remove="Migrations\20191201162921_Initial.cs" />
+    <Compile Remove="Migrations\20191201162921_Initial.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.0-preview3.19555.2" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.0-preview3.19554.8">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>

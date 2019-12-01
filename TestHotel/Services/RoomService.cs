@@ -52,7 +52,7 @@ namespace TestHotel.Services
 
         public async Task<List<Room>> GetRooms()
         {
-            var rooms = await _context.Rooms.ToListAsync();
+            var rooms = await _context.Rooms.Include(s => s.State).Include(t=>t.Type).ToListAsync();
             return rooms;
         }
 
