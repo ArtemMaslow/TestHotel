@@ -44,11 +44,11 @@ namespace TestHotel
             });
 
             services.AddIdentity<User, IdentityRole>().AddEntityFrameworkStores<DatabaseContext>();
-            services.Configure<IdentityOptions>(options=>
+            services.Configure<IdentityOptions>(options =>
             {
                 options.Password.RequireNonAlphanumeric = false;
             });
-            
+
             //services
             services.AddScoped<ClientService>();
             services.AddScoped<RoomService>();
@@ -68,6 +68,7 @@ namespace TestHotel
             //{
             //    app.UseDeveloperExceptionPage();
             //}
+            InitializeData.CreateData(app);
 
             app.UseSwagger();
             app.UseSwaggerUI(s =>
@@ -86,6 +87,8 @@ namespace TestHotel
             {
                 endpoints.MapControllers();
             });
+
+            
         }
     }
 }

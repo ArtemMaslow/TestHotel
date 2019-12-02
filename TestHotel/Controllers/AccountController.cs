@@ -16,11 +16,12 @@ namespace TestHotel.Controllers
         private ClientService _clientService;
         private readonly UserManager<User> _userManager;
         private readonly SignInManager<User> _signInManager;
-
-        public AccountController(UserManager<User> userManager, SignInManager<User> signInManager, ClientService clientService)
+        private readonly RoleManager<IdentityRole> _roleManager;
+        public AccountController(UserManager<User> userManager, SignInManager<User> signInManager, RoleManager<IdentityRole> roleManager, ClientService clientService)
         {
             _userManager = userManager;
             _signInManager = signInManager;
+            _roleManager = roleManager;
             _clientService = clientService;
         }
 
@@ -42,8 +43,10 @@ namespace TestHotel.Controllers
                 var result = await _userManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
+                    await _userManager.AddToRoleAsync(user, "user");
                     await _signInManager.SignInAsync(user, false);
                     await _clientService.CreateClient(model.Client.Name, model.Client.Surname, model.Client.Patronymic, model.Client.Phone);
+
                     return RedirectToAction("Index", "Room");
                 }
                 else
@@ -74,7 +77,6 @@ namespace TestHotel.Controllers
                 var result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, false);
                 if (result.Succeeded)
                 {
-                    // проверяем, принадлежит ли URL приложению
                     if (!string.IsNullOrEmpty(model.ReturnUrl) && Url.IsLocalUrl(model.ReturnUrl))
                     {
                         return Redirect(model.ReturnUrl);
