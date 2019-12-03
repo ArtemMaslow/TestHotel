@@ -8,7 +8,7 @@ using TestHotel.ViewModels;
 
 namespace TestHotel.Controllers
 {
-    [Route("RoomType")]
+    [Route("RoomTypes")]
     public class RoomTypeController : Controller
     {
         private readonly RoomTypeService _roomTypeService;

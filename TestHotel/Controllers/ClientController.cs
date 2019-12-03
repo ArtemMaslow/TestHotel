@@ -9,7 +9,7 @@ using TestHotel.Services;
 using TestHotel.ViewModels;
 namespace TestHotel.Controllers
 {
-    [Route("Client")]
+    [Route("Clients")]
     public class ClientController : Controller
     {
         private readonly ClientService _clientService;

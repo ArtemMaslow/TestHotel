@@ -34,15 +34,8 @@ namespace TestHotel.Models
             }
         }
 
-        public static async Task CreateData(IApplicationBuilder app)
+        public static async Task CreateData(DatabaseContext context, UserManager<User> userManager, RoleManager<IdentityRole> roleManager)
         {
-            DatabaseContext context = app.ApplicationServices
-                .GetRequiredService<DatabaseContext>();
-            context.Database.Migrate();
-
-            UserManager<User> userManager = app.ApplicationServices.GetRequiredService<UserManager<User>>();
-            RoleManager<IdentityRole> roleManager = app.ApplicationServices.GetRequiredService<RoleManager<IdentityRole>>();
-
             await CreateRolesAndAdmin(userManager, roleManager);
 
             if (!context.RoomTypes.Any())

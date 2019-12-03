@@ -10,7 +10,7 @@ using TestHotel.ViewModels;
 
 namespace TestHotel.Controllers
 {
-    [Route("Account")]
+    [Route("Accounts")]
     public class AccountController : Controller
     {
         private ClientService _clientService;

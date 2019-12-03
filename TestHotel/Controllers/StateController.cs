@@ -6,7 +6,7 @@ using TestHotel.ViewModels;
 
 namespace TestHotel.Controllers
 {
-    [Route("State")]
+    [Route("States")]
     public class StateController : Controller
     {
         private readonly StateService _stateService;

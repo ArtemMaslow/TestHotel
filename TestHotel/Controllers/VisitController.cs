@@ -10,7 +10,7 @@ using TestHotel.ViewModels;
 
 namespace TestHotel.Controllers
 {
-    [Route("Visit")]
+    [Route("Visits")]
     public class VisitController : Controller
     {
         private readonly VisitService _visitService;

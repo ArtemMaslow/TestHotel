@@ -10,7 +10,7 @@ using TestHotel.ViewModels;
 
 namespace TestHotel.Controllers
 {
-    [Route("Room")]
+    [Route("Rooms")]
     public class RoomController : Controller
     {
         private readonly RoomService _roomService;
@@ -46,8 +46,7 @@ namespace TestHotel.Controllers
         }
 
         [HttpGet]
-        [Route("{typeId?}/{stateId?}/{capacity?}/{number?}/{page?}/{sortOrder?}")]
-        public async Task<IActionResult> Index([FromRoute]Guid? typeId, [FromRoute]Guid? stateId, [FromRoute]int? capacity, [FromRoute]string number, [FromRoute]int page = 1, [FromRoute]SortState sortOrder = SortState.NumberAsc)
+        public async Task<IActionResult> Index([FromQuery]Guid? typeId, [FromQuery]Guid? stateId, [FromQuery]int? capacity, [FromQuery]string number, [FromQuery]int page = 1, [FromQuery]SortState sortOrder = SortState.NumberAsc)
         {
             int pageSize = 20;
 
@@ -75,7 +74,7 @@ namespace TestHotel.Controllers
             }
             if (!String.IsNullOrEmpty(number))
             {
-                rooms = rooms.Where(n => n.Number.Contains(number)).ToList();
+                rooms = rooms.Where(n => n.Number.Equals(number)).ToList();
             }
 
             //Sort

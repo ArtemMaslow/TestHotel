@@ -17,9 +17,9 @@ namespace TestHotel.ViewModels
         {
             NumberSort = sortOrder == SortState.NumberAsc ? SortState.NumberDesc : SortState.NumberAsc;
             TypeSort = sortOrder == SortState.TypeAsc ? SortState.TypeDesc : SortState.TypeAsc;
-            CapacitySort = sortOrder == SortState.StateAsc ? SortState.StateDesc : SortState.StateAsc;
-            StateSort = sortOrder == SortState.CapacityAsc ? SortState.CapacityDesc : SortState.CapacityAsc;
-            
+            CapacitySort = sortOrder == SortState.CapacityAsc ? SortState.CapacityDesc : SortState.CapacityAsc; 
+            StateSort = sortOrder == SortState.StateAsc ? SortState.StateDesc : SortState.StateAsc;
+
             Current = sortOrder;
         }
     }

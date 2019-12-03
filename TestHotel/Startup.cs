@@ -64,12 +64,6 @@ namespace TestHotel
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            //if (env.IsDevelopment())
-            //{
-            //    app.UseDeveloperExceptionPage();
-            //}
-            InitializeData.CreateData(app);
-
             app.UseSwagger();
             app.UseSwaggerUI(s =>
             {
